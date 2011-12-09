@@ -346,6 +346,16 @@ class Review extends ReviewsDBObject {
 		return $map[$string];
 	}
 	
+	public static function getStateMessages() {
+		$messages = array();
+		
+		foreach ( self::$stateStringMap as $status ) {
+			$messages[$status] = wfMsg( 'reviews-state-' .  $status );
+		}
+	
+		return $messages;
+	}
+	
 	/**
 	 * Get HTML to represent the review.
 	 * 

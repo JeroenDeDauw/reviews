@@ -79,7 +79,7 @@ class SpecialMyReviews extends SpecialPage {
 	 */
 	protected function displayReviewList() {
 		$reviewPager = new ReviewPager(
-			array( 'review_user_id' => $this->getUser()->getId() ),
+			array( 'user_id' => $this->getUser()->getId() ),
 			$this->getName()
 		);
 

@@ -66,14 +66,14 @@ class SpecialReviews extends SpecialPage {
 		
 		if ( $subPage === '' ) {
 			$out->addWikiMsg( 'reviews-reviews-header' );
-			$this->displayReviewList();
+			$this->doListView();
 		}
 		else {
 			$review = Review::selectRow( null, array( 'id' => $subPage ) );
 			
 			if ( $review === false ) {
 				$out->addWikiMsg( 'reviews-reviews-nosuchreview' );
-				$this->displayReviewList();
+				$this->doListView();
 			}
 			else {
 				$out->addModules( 'ext.reviews.special.reviews' );
@@ -91,14 +91,128 @@ class SpecialReviews extends SpecialPage {
 			}
 		}
 	}
+	
+	/**
+	 * Display the page in review list state.
+	 * 
+	 * @since 0.1
+	 */
+	protected function doListView() {
+		$this->addFilterOptionsToSession();
+		$this->showFilterControl();
+		$this->displayReviewList();
+	}
+	
+	/**
+	 * Add the filter options to the session, so they get retained
+	 * when the user does navigation such as going to the next
+	 * set of results using the pager.
+	 * 
+	 * @since 0.1
+	 */
+	protected function addFilterOptionsToSession() {
+		$fields = array(
+			'state',
+		);
+		
+		$req = $this->getRequest();
+		
+		foreach ( $fields as $field ) {
+			if ( $req->getCheck( $field ) ) {
+				$req->setSessionData( 'reviews-' . $field, $req->getVal( $field ) );
+			}
+		}
+	}
 
+	/**
+	 * Create the filter control and add it to the output.
+	 * 
+	 * @since 0.1
+	 */
+	protected function showFilterControl() {
+		$req = $this->getRequest();
+		
+		$title = $this->getTitle( $this->subPage )->getFullText();
+		
+		$this->getOutput()->addHTML(
+			'<fieldset>' .
+				'<legend>' . wfMsgHtml( 'reviews-reviews-showonly' ) . '</legend>' .
+				'<form method="post" action="' . $GLOBALS['wgScript'] . '?title=' . $title . '">' .
+					Html::hidden( 'title', $title ) .
+					$this->getDropdownHTML(
+						'state', 
+						Review::getStateMessages()
+					) .
+					'<input type="submit" value="' . wfMsgHtml( 'reviews-reviews-go' ) . '">' .
+				'</form>' .
+			'</fieldset>'
+		);
+	}
+	
+	/**
+	 * Get the HTML for a filter option dropdown menu.
+	 * 
+	 * @since 0.1
+	 * 
+	 * @param string $name
+	 * @param array $options
+	 * @param string|null $message
+	 * @param mixed $value
+	 * 
+	 * @return string
+	 */
+	protected function getDropdownHTML( $name, array $options, $message = null, $value = null ) {
+		$opts = array();
+		$options = array_merge( array( '' => ' ' ), $options );
+		
+		if ( is_null( $value ) ) {
+			$value = $this->getRequest()->getSessionData( 'reviews-' . $name );
+		}
+		
+		if ( is_null( $message ) ) {
+			$message = 'reviews-reviews-filter-' . $name;
+		}
+		
+		foreach ( $options as $val => $label ) {
+			$attribs = array( 'value' => $val );
+			
+			if ( $val == $value || ( $val === ' ' && !array_key_exists( $val, $options ) ) ) {
+				$attribs['selected'] = 'selected';
+			}
+			
+			$opts[] = Html::element( 'option', $attribs, $label );
+		}
+		
+		return Html::element( 'label', array( 'for' => $name ), wfMsg( $message ) ) . '&#160;' .
+			Html::rawElement( 'select', array( 'name' => $name, 'id' => $name ), implode( "\n", $opts ) ) . '&#160;';
+	}
+	
+	/**
+	 * Get the request conditions.
+	 * 
+	 * @since 0.1
+	 * 
+	 * @return array
+	 */
+	protected function getRequestConditions() {
+		$req = $this->getRequest();
+		
+		$conds = array();
+		
+		if ( in_array( $req->getSessionData( 'reviews-state' ), array_keys( Review::getStateMessages() ) ) ) {
+			$conds['state'] = Review::getStateForString( $req->getSessionData( 'reviews-state' ) );
+		}
+		
+		return $conds;
+	}
+	
 	/**
 	 * Display the list of reviews.
 	 * 
 	 * @since 0.1
 	 */
 	protected function displayReviewList() {
-		$reviewPager = new ReviewPager( array() );
+		$reviewPager = new ReviewPager( $this->getRequestConditions() );
 
 		if ( $reviewPager->getNumRows() ) {
 			$this->getOutput()->addHTML(

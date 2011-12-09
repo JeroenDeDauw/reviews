@@ -94,6 +94,11 @@ $messages['en'] = array(
 	'reviews-reviews-header-rating' => 'Main rating',
 	'reviews-reviews-header-ratings' => 'Other ratings',
 
+	'reviews-reviews-go' => 'Go',
+	'reviews-reviews-showonly' => 'Show only these reviews',
+
+	'reviews-reviews-filter-state' => 'State',
+
 	// Review pager
 	'reviews-pager-no-results' => 'There are no reviews to list.',
 	'reviews-pager-post-time' => 'Post time',
