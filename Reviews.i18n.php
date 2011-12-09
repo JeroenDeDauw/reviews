@@ -123,6 +123,7 @@ $messages['en'] = array(
 	'reviews-review-edit' => 'Edit',
 	'reviews-review-delete' => 'Delete',
 	'reviews-display-delete-confirm' => 'Are you sure you want to delete this review?',
+	'reviews-was-flagged' => 'This review has been flagged for review.',
 );
 
 /** Message documentation (Message documentation)

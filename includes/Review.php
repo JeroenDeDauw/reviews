@@ -431,11 +431,15 @@ class Review extends ReviewsDBObject {
 			$lang->date( $this->getField( 'post_time' ), true )
 		) );
 		
-		$html .= '</td>';
+		$html .= '</td><td>';
 		
-		$html .= Html::element( 'td', array(), $this->getField( 'text' ) );
+		$html .= htmlspecialchars( $this->getField( 'text' ) );
 		
-		$html .= '</tr>';
+		if ( $this->getField( 'state' ) === Review::STATUS_FLAGGED ) {
+			$html .= ' ' . Html::element( 'p', array( 'class' => 'reviews-was-flagged' ), wfMsg( 'reviews-was-flagged' ) );
+		}
+		
+		$html .= '</td></tr>';
 		
 		if ( $this->hasRatings() ) {
 			$html .= '<tr>';

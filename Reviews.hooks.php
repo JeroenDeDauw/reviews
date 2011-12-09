@@ -171,7 +171,7 @@ final class ReviewsHooks {
 		if ( property_exists( $out, 'reviewsMagicWord' ) && $out->reviewsMagicWord ) {
 			$reviewPager = new ReviewPager( array( 'page_id' => $out->getTitle()->getArticleID() ) );
 
-			if ( $reviewPager->getNumRows() ) {
+			if ( $reviewPager->getNumRows() > 0 ) {
 				$out->addHTML( HTML::element( 'h2', array( 'id' => 'reviewslist' ), wfMsg( 'reviews-list-title' ) ) );
 				
 				$out->addHTML(
@@ -226,7 +226,6 @@ final class ReviewsHooks {
 	 * @return true
 	 */
 	public static function onParserFirstCallInit( Parser &$parser ) {
-		//$parser->setHook( 'reviews', __CLASS__ . '::onReviewsRender' );
 		$parser->setHook( 'review_ratings', __CLASS__ . '::onRatingsRender' );
 		return true;
 	}

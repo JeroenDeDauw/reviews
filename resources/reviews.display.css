@@ -32,3 +32,8 @@ table.review-table, table.review-table td, table.review-table th {
 	color: darkgray;
 	font-size: 80%;
 }
+
+.reviews-was-flagged {
+	color: #900001;
+	font-size: 80%;
+}
