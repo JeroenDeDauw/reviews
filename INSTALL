@@ -40,3 +40,53 @@ http://svn.wikimedia.org/viewvc/mediawiki/trunk/extensions/Reviews/Reviews.setti
 You should NOT modify the settings file, but can have a look at it to get an idea of
 how to use the settings, in case the below descriptions do not suffice.
 
+{| class="wikitable sortable"
+! Name
+! Type
+! Default
+! Description
+|-
+| reviewDeletionEnabled
+| boolean
+| true
+| If deletion of reviews should be enabled
+|-
+| enableTopLink
+| boolean
+| true
+| If the link to MyReviews in the top menu should be enabled 
+|-
+| categoryRatings
+| array
+| array()
+| Adittional rating types per category. Example:<pre>$egReviewsSettings['categoryRatings'] = array(
+	'Hotels' => array(
+		'Price' => 'Price',
+		'Confort' => 'Confort',
+	),
+);</pre>
+|}
+
+Furthermore, you can set the default values of some user preferences, done by assigning to $wgDefaultUserOptions.
+
+{| class="wikitable sortable"
+! Name
+! Type
+! Default
+! Description
+|-
+| reviews_showtoplink
+| boolean
+| true
+| Show the toplink (if enabled) by default?
+|-
+| reviews_showcontrol
+| boolean
+| true
+| Show the review sbmission control by default?
+|-
+| reviews_showedit
+| boolean
+| false
+| Show the review edit control by default? 
+|}

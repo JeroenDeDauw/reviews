@@ -5,11 +5,18 @@ Latest version of the readme file: http://svn.wikimedia.org/viewvc/mediawiki/tru
 
 == About ==
 
-Reviews is a MediaWiki extension.
+The Reviews extension allows users to post Reviews on articles that have been marked as
+reviewable (using the __REVIEWABLE__ magic word) with one or more ratings. These
+articles also list previously posted reviews. Authors can edit their reviews and
+everyone can flag their reviews for review. Admins can approve and remove reviews.
 
 === Feature overview ===
 
-
+* People can post reviews on articles with one or more ratings attached.
+* Review authors can view and edit their reviews.
+* People with the can flag reviews.
+* Admins can approve and delete reviews.
+* Reviews can be sorted and filtered on various criteria.
 
 == Credits to other projects ==
 

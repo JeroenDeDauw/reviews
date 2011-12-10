@@ -10,4 +10,8 @@ Latest version of the release notes: http://svn.wikimedia.org/viewvc/mediawiki/t
 
 Initial release with these features:
 
-* 
+* People can post reviews on articles with one or more ratings attached.
+* Review authors can view and edit their reviews.
+* People with the can flag reviews.
+* Admins can approve and delete reviews.
+* Reviews can be sorted and filtered on various criteria.
