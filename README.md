@@ -1,7 +1,6 @@
 These is the readme file for the Reviews extension.
 	
-Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Reviews
-Latest version of the readme file: http://svn.wikimedia.org/viewvc/mediawiki/trunk/extensions/Reviews/README?view=co
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=JeroenDeDauw&url=https://github.com/JeroenDeDauw&title=Jeroen De Dauw&language=en_GB&tags=github&category=software) 
 
 == About ==
 
