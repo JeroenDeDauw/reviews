@@ -68,9 +68,6 @@ final class ReviewsHooks {
 
 			// Find the watchlist item and replace it by the my reviews link and itself.
 			if ( $wgUser->isLoggedIn() && $wgUser->getOption( 'reviews_showtoplink' ) ) {
-				$keys = array_keys( $personal_urls );
-				$watchListLocation = array_search( 'watchlist', $keys );
-				$watchListItem = $personal_urls[$keys[$watchListLocation]];
 
 				$url = SpecialPage::getTitleFor( 'MyReviews' )->getLinkUrl();
 				$myReviews = array(
@@ -79,7 +76,9 @@ final class ReviewsHooks {
 					'active' => ( $url == $title->getLinkUrl() )
 				);
 
-				array_splice( $personal_urls, $watchListLocation, 1, array( $myReviews, $watchListItem ) );
+				$insertUrls = array( 'myreviews' => $myReviews );
+		
+				$personal_urls = wfArrayInsertAfter( $personal_urls, $insertUrls, 'preferences' );
 			}
 		}
 
