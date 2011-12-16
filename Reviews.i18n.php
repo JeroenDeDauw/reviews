@@ -23,6 +23,7 @@ $messages['en'] = array(
 	// Misc
 	'reviews-toplink' => 'My reviews',
 	'reviews-list-title' => 'Reviews',
+	'specialpages-group-reviews' => 'Reviews',
 
 	// Rights
 	'right-reviewsadmin' => 'Manage reviews',
