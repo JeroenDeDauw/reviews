@@ -137,7 +137,7 @@ class SpecialReviews extends SpecialPage {
 		$this->getOutput()->addHTML(
 			'<fieldset>' .
 				'<legend>' . wfMsgHtml( 'reviews-reviews-showonly' ) . '</legend>' .
-				'<form method="post" action="' . $GLOBALS['wgScript'] . '?title=' . $title . '">' .
+				'<form method="post" action="' . htmlspecialchars( wfAppendQuery( $GLOBALS['wgScript'], array( 'title' => $title ) ) ) . '">' .
 					Html::hidden( 'title', $title ) .
 					$this->getDropdownHTML(
 						'state', 
