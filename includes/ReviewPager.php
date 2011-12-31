@@ -139,10 +139,6 @@ class ReviewPager extends TablePager {
 		return 'TablePager review-contestants';
 	}
 
-	function getIndexField() {
-		return 'review_id';
-	}
-
 	function getDefaultSort() {
 		return 'review_post_time';
 	}
