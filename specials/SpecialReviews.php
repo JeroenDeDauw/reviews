@@ -130,8 +130,6 @@ class SpecialReviews extends SpecialPage {
 	 * @since 0.1
 	 */
 	protected function showFilterControl() {
-		$req = $this->getRequest();
-		
 		$title = $this->getTitle( $this->subPage )->getFullText();
 		
 		$this->getOutput()->addHTML(
