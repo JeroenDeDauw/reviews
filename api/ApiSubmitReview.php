@@ -51,6 +51,18 @@ class ApiSubmitReview extends ApiBase {
 			}
 		}
 	}
+
+	/**
+	 * Get the User for this context.
+	 * ApiBase extends ContextSource as of 1.19.
+	 *
+	 * @since 0.1
+	 *
+	 * @return User
+	 */
+	public function getUser() {
+		return method_exists( 'ApiBase', 'getUser' ) ? parent::getUser() : $GLOBALS['wgUser'];
+	}
 	
 	protected function writeReviewToDB( Review $review ) {
 		$this->getResult()->addValue(
